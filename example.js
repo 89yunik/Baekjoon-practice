@@ -2,25 +2,25 @@ const fs = require('fs')
 const input = fs.readFileSync('./dev/stdin').toString().split('\r\n')
 // const input = fs.readFileSync('/dev/stdin').toString().split('\n')
 
-const T = input.shift()
-for (let i = 0; i < T; i++) {
-  const PS = input[i].split('')
-  const stack = []
-  let isVPS = true
-  for (str of PS) {
-    if (str === '(') {
-      stack.push(str)
-    } else {
-      if (stack[stack.length - 1] === '(') {
-        stack.pop()
-      } else {
-        isVPS = false
-        break
-      }
-    }
+const n = parseInt(input.shift())
+const stack = []
+let answer = ''
+let cnt = 1
+for (let i = 0; i < n; i++) {
+  const num = parseInt(input[i])
+  while (cnt <= num) {
+    stack.push(cnt)
+    answer += '+' + '\n'
+    cnt++
   }
-  if (stack.length) {
-    isVPS = false
+  const max = stack.pop()
+  if (max !== num) {
+    answer = 'NO'
+    break
   }
-  isVPS ? console.log('YES') : console.log('NO')
+  answer += '-'
+  if (i < n - 1) {
+    answer += '\n'
+  }
 }
+console.log(answer)
