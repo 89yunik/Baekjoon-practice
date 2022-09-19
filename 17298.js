@@ -4,12 +4,14 @@ const input = fs.readFileSync('./dev/stdin').toString().split('\r\n')
 
 const N = parseInt(input.shift())
 const A = input[0].split(' ').map(e => parseInt(e))
-let answer = new Array(N).fill(-1)
-for (let i = N - 2; i >= 0; i--) {
+let answerIndex = new Array(N).fill(-1)
+let answer = ''
+for (let i = N - 1; i >= 0; i--) {
   let cnt = i + 1
   while (A[i] >= A[cnt] && cnt < N) {
-    cnt = answer[cnt]
+    cnt = answerIndex[cnt]
   }
-  answer[i] = cnt
+  answerIndex[i] = cnt
+  answer = (A[cnt] || -1) + ' ' + answer
 }
-console.log(answer.map(e => A[e] || -1).join(' '))
+console.log(answer)
