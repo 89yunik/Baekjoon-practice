@@ -1,26 +1,14 @@
 const fs = require('fs')
-const input = fs.readFileSync('./dev/stdin').toString().split('\r\n')
-// const input = fs.readFileSync('/dev/stdin').toString().split('\n')
+const input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
+// const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
 
-const n = parseInt(input.shift())
-const stack = []
-let answer = ''
-let cnt = 1
-for (let i = 0; i < n; i++) {
-  const num = parseInt(input[i])
-  while (cnt <= num) {
-    stack.push(cnt)
-    answer += '+' + '\n'
-    cnt++
-  }
-  const max = stack.pop()
-  if (max !== num) {
-    answer = 'NO'
-    break
-  }
-  answer += '-'
-  if (i < n - 1) {
-    answer += '\n'
-  }
+const N = parseInt(input[0])
+let [x, i, b] = [0, 0, 0]
+for (i = 1; x + i < N; i++) {
+  x += i
 }
-console.log(answer)
+
+const numerator = i % 2 !== 0 ? i + 1 - (N - x) : N - x
+const denominator = i % 2 !== 0 ? N - x : i + 1 - (N - x)
+
+console.log(numerator + '/' + denominator)
