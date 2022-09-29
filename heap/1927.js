@@ -2,24 +2,15 @@ const fs = require('fs')
 let input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
 // let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
 
-class Heap {
+class minHeap {
   constructor() {
     this.nodes = []
-  }
-  compare(a, b) {
-    if (Math.abs(a) < Math.abs(b)) {
-      return true
-    } else if (Math.abs(a) === Math.abs(b) && a < b) {
-      return true
-    } else {
-      return false
-    }
   }
   insert(data) {
     this.nodes.push(data)
     let child = this.nodes.length - 1
     let parent = Math.floor((child - 1) / 2)
-    while (this.compare(this.nodes[child], this.nodes[parent]) && child > 0) {
+    while (this.nodes[child] < this.nodes[parent] && child > 0) {
       const temp = this.nodes[parent]
       this.nodes[parent] = this.nodes[child]
       this.nodes[child] = temp
@@ -34,26 +25,22 @@ class Heap {
     }
     const min = this.nodes.splice(0, 1, end)
     let parent = 0
-    let child = this.compare(
-      this.nodes[(parent + 1) * 2],
-      this.nodes[(parent + 1) * 2 - 1],
-    )
-      ? (parent + 1) * 2
-      : (parent + 1) * 2 - 1
+    let child =
+      this.nodes[(parent + 1) * 2 - 1] > this.nodes[(parent + 1) * 2]
+        ? (parent + 1) * 2
+        : (parent + 1) * 2 - 1
     while (
       (parent + 1) * 2 - 1 < this.nodes.length &&
-      this.compare(this.nodes[child], this.nodes[parent])
+      this.nodes[parent] > this.nodes[child]
     ) {
       const temp = this.nodes[parent]
       this.nodes[parent] = this.nodes[child]
       this.nodes[child] = temp
       parent = child
-      child = this.compare(
-        this.nodes[(parent + 1) * 2],
-        this.nodes[(parent + 1) * 2 - 1],
-      )
-        ? (parent + 1) * 2
-        : (parent + 1) * 2 - 1
+      child =
+        this.nodes[(parent + 1) * 2 - 1] > this.nodes[(parent + 1) * 2]
+          ? (parent + 1) * 2
+          : (parent + 1) * 2 - 1
     }
     return min
   }
@@ -61,7 +48,7 @@ class Heap {
 
 const N = input.shift()
 let answer = ''
-const heap = new Heap()
+const heap = new minHeap()
 for (let num of input) {
   num = Number(num)
   if (num === 0) {
