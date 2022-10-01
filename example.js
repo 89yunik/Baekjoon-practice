@@ -1,22 +1,26 @@
 const fs = require('fs')
 let input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
 // let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
+//1456
+let [A, B] = input
+  .shift()
+  .split(' ')
+  .map(e => Number(e))
+// const max = Math.floor(Math.sqrt(B))
+// const pNum = new Array(max + 1).fill(true)
+// pNum[0] = false
+// pNum[1] = false
+// for (let i = 2; i < max + 1; i++) {
+//   for (let j = 2; i * j < max + 1; j++) {
+//     pNum[i * j] = false
+//   }
+//   i = pNum.slice()
+// }
+// const answers = new Set()
+// for (let i = 2; i <= max; i++) {
+//   for (let j = 2; Math.pow(i, j) <= B; j++) {
+//     answers.add(Math.pow(i, j))
+//   }
+// }
 
-const num = Number(input[0])
-const array = new Array(num + 1)
-array[0] = 0
-array[1] = 0
-array[2] = 1
-array[3] = 1
-for (let i = 4; i <= num; i++) {
-  const candidate = [array[i - 1]]
-  if (i % 3 === 0) {
-    candidate.push(array[i / 3])
-  }
-  if (i % 2 === 0) {
-    candidate.push(array[i / 2])
-  }
-  array[i] = Math.min(...candidate) + 1
-}
-let answer = array[num]
-console.log(answer)
+// console.log([...answers], answers.size)
