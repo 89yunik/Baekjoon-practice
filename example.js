@@ -1,24 +1,37 @@
+//fs
 const fs = require('fs')
+//로컬 테스트 경로
 const input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
+//제출 시 경로
 //const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
-
-function dfs(R) {
-  visited[R] = num
-  for (let i = 0; i < graph[R].length; i++) {
-    const x = graph[R][i]
-    if (!visited[x]) dfs(x, ++num)
+//input[0].split(' ').map(e => +e)
+const [A, B] = input[0].split(' ').map(e => +e)
+const queue = []
+let [curr, num, answer] = [0, 1, -1]
+queue.push([A, num])
+while (queue.length) {
+  curr = queue.shift()
+  if (curr[0] === B) {
+    answer = curr[1]
+    break
   }
+  const next = [curr[0] * 2, Number(curr[0].toString() + '1')]
+  if (next[0] <= B) queue.push([next[0], curr[1] + 1])
+  if (next[1] <= B) queue.push([next[1], curr[1] + 1])
 }
-const [N, M, R] = input[0].split(' ').map(e => +e)
-const visited = new Array(N + 1).fill(0)
-const graph = new Array(N + 1).fill().map(_ => [])
-let num = 1
-for (let i = 1; i <= M; i++) {
-  const [a, b] = input[i].split(' ').map(e => +e)
-  graph[a].push(b)
-  graph[b].push(a)
-}
-graph.forEach(e => e.sort((a, b) => a - b))
-dfs(R, num)
-visited.shift()
-console.log(visited.join('\n'))
+console.log(answer)
+// rl
+// const readline = require('readline')
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// })
+
+// let input = []
+
+// rl.on('line', function (line) {
+//   input.push(line)
+// }).on('close', function () {
+//   process.exit()
+// })
