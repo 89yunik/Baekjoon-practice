@@ -8,24 +8,25 @@ const nArr = input[1]
   .map(e => +e)
   .sort((a, b) => a - b)
 const stack = []
-let answer = new Set()
+let answer = []
 let start = 0
 while (start < N) {
   stack.push([start])
   while (stack.length) {
     const curr = stack.pop()
+    const visited = new Array(N).fill(false)
+    curr.forEach(e => (visited[e] = true))
     if (curr.length === M) {
-      answer.add(curr.map(e => nArr[e]).join(' '))
+      answer.push(curr.map(e => nArr[e]).join(' '))
       continue
     }
-    const index = curr[curr.length - 1]
-    for (let i = N - 1; i >= index; i--) {
-      stack.push([...curr, i])
+    for (let i = N - 1; i >= 0; i--) {
+      if (!visited[i]) stack.push([...curr, i])
     }
   }
   start++
 }
-console.log([...answer].join('\n'))
+console.log(answer.join('\n'))
 // const readline = require('readline')
 
 // const rl = readline.createInterface({

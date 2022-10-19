@@ -14,13 +14,14 @@ while (start < N) {
   stack.push([start])
   while (stack.length) {
     const curr = stack.pop()
+    const visited = new Array(N).fill(false)
+    curr.forEach(e => (visited[e] = true))
     if (curr.length === M) {
       answer.add(curr.map(e => nArr[e]).join(' '))
       continue
     }
-    const index = curr[curr.length - 1]
-    for (let i = N - 1; i >= index; i--) {
-      stack.push([...curr, i])
+    for (let i = N - 1; i >= 0; i--) {
+      if (!visited[i]) stack.push([...curr, i])
     }
   }
   start++

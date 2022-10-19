@@ -8,14 +8,14 @@ const nArr = input[1]
   .map(e => +e)
   .sort((a, b) => a - b)
 const stack = []
-let answer = new Set()
+let answer = []
 let start = 0
 while (start < N) {
   stack.push([start])
   while (stack.length) {
     const curr = stack.pop()
     if (curr.length === M) {
-      answer.add(curr.map(e => nArr[e]).join(' '))
+      answer.push(curr.map(e => nArr[e]).join(' '))
       continue
     }
     const index = curr[curr.length - 1]
@@ -25,7 +25,7 @@ while (start < N) {
   }
   start++
 }
-console.log([...answer].join('\n'))
+console.log(answer.join('\n'))
 // const readline = require('readline')
 
 // const rl = readline.createInterface({
