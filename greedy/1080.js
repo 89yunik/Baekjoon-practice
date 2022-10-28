@@ -2,7 +2,6 @@ const {BADFLAGS} = require('dns')
 const fs = require('fs')
 const input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
 // const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
-//1080
 
 function swap(x, y) {
   for (let i = x; i < x + 3; i++)
