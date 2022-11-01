@@ -1,22 +1,13 @@
 const fs = require('fs')
-const input = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
-// const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
-const n = +input[0]
-const tree = Array.from({length: n + 1}, _ => [])
-for (let i = 1; i <= n - 1; i++) {
-  const [p, c, l] = input[i].split(' ').map(Number)
-  tree[p].push([c, l])
-  tree[c].push([p, l])
+let A = fs.readFileSync('./dev/stdin').toString().trim().split('\r\n')
+// let A = fs.readFileSync('/dev/stdin').toString().trim().split('\n')
+const N = +A.shift()
+A = A.map(Number).sort((a, b) => b - a)
+const B = new Set()
+for (let i = 0; i < N; i++)
+  for (let j = i; j < N; j++) if (A[0] > A[i] + A[j]) B.add(A[i] + A[j])
+A = new Set(A)
+function sol() {
+  for (const a of A) for (const b of A) if (B.has(a - b)) return a
 }
-function dfs(curr, l) {
-  if (visited.has(curr)) return
-  visited.add(curr)
-  if (l > max) [node, max] = [curr, l]
-  for ([next, nextL] of tree[curr]) dfs(next, l + nextL)
-}
-let [node, max] = [0, 0]
-const visited = new Set()
-dfs(1, 0)
-visited.clear()
-dfs(node, 0)
-console.log(max)
+console.log(sol())
