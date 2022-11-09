@@ -5,8 +5,8 @@ const [N, M] = input.shift().split(' ').map(Number)
 let output = -1
 function dfs(num, i, j, x, y) {
   if (Number.isInteger(Math.sqrt(+num)) && output < +num) output = +num
-  const [xN, yN] = [i + x, j + y]
-  if (xN < N && xN >= 0 && yN < M && yN >= 0 && (x || y))
+  const [I, J] = [i + x, j + y]
+  if (I < N && I >= 0 && J < M && J >= 0 && (x || y))
     dfs(num + input[i + x][j + y], i + x, j + y, x, y)
 }
 for (let i = 0; i < N; i++)
