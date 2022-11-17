@@ -1,19 +1,19 @@
-const N = +require('fs').readFileSync('./dev/stdin').toString()
-// .trim()
-// .split('\r\n')
-// const N = +require('fs').readFileSync('/dev/stdin').toString()
-// .trim().split('\n')
-const [A, visited] = [[], Array(N + 1).fill(0)]
-for (let i = 2; i <= N; i++) {
-  if (visited[i]) continue
-  A.push(i)
-  for (let j = 1; i * j <= N; j++) visited[i * j] = 1
+const I = require('fs')
+  .readFileSync('./dev/stdin')
+  .toString()
+  .trim()
+  .split('\r\n')
+// const I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
+const [N, M] = I.shift().split(' ').map(Number)
+let O = Infinity
+function F(x, a, b) {
+  const y = x == 'B' ? 'W' : 'B'
+  let n = 0
+  for (let i = a; i < a + 8; i++)
+    for (let j = b; j < b + 8; j++)
+      if (((i + j) % 2 && I[i][j] == x) || (!((i + j) % 2) && I[i][j] == y)) n++
+  return n
 }
-let [l, O, n, i, j] = [A.length, 0, 0, 0, 0]
-while (n >= 0)
-  if (n < N) n += A[j++]
-  else {
-    if (n == N) O++
-    n -= A[i++]
-  }
+for (let i = 0; i < N - 7; i++)
+  for (let j = 0; j < M - 7; j++) O = Math.min(O, F('B', i, j), F('W', i, j))
 console.log(O)

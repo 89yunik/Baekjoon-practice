@@ -1,8 +1,5 @@
 const N = +require('fs').readFileSync('./dev/stdin').toString()
-// .trim()
-// .split('\r\n')
 // const N = +require('fs').readFileSync('/dev/stdin').toString()
-// .trim().split('\n')
 const [A, visited] = [[], Array(N + 1).fill(0)]
 for (let i = 2; i <= N; i++) {
   if (visited[i]) continue
