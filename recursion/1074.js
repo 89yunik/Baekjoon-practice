@@ -7,16 +7,11 @@ const I = require('fs')
 const [N, r, c] = I[0].split(' ').map(Number)
 function quartered(N, r, c) {
   if (N == 1) return (r % 2) * 2 + (c % 2)
-  let x = 0
   const l = Math.pow(2, N - 1)
-  if (r >= l) {
-    x += 2
-    r -= l
-  }
-  if (c >= l) {
-    x += 1
-    c -= l
-  }
-  return x * Math.pow(4, N - 1) + quartered(N - 1, r, c)
+  const [a, b] = [parseInt(r / l), parseInt(c / l)]
+  const x = 2 * a + b
+  if (a) r -= l
+  if (b) c -= l
+  return x * l * l + quartered(N - 1, r, c)
 }
 console.log(quartered(N, r, c))
