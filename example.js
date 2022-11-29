@@ -1,13 +1,12 @@
 let N = +require('fs').readFileSync('./dev/stdin').toString().trim()
 // .split('\r\n')
 // const I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
-let dp = new Array(10).fill(1n)
-dp[0] = 0n
+let A = new Array(10).fill(1n)
+A[0] = 0n
 while (--N) {
-  const temp = [...dp]
-  for (let i = 0; i < 10; i++)
-    temp[i] = (i ? dp[i - 1] : 0n) + (i < 9 ? dp[i + 1] : 0n)
-  dp = temp
+  const B = [...A]
+  for (let i = 0; i < 10; i++) B[i] = (A[i - 1] ?? 0n) + (A[i + 1] ?? 0n)
+  A = B
 }
-const o = dp.reduce((a, b) => a + b, 0n) % 1000000000n
+const o = A.reduce((a, b) => a + b, 0n) % 1000000000n
 console.log(o.toString())
