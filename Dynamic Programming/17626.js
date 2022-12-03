@@ -10,11 +10,3 @@ for (let i = 2; i <= n; i++) {
   dp[i] = min + 1
 }
 console.log(dp[n])
-// const m = new Array(4).fill().map(_ => new Set())
-// for (let i = 1; i <= max; i++) m[0].add(i * i)
-// let i = 0
-// for (; i < 3; i++) {
-//   if (m[i].has(n)) break
-//   for (const x of m[i]) for (const y of m[0]) m[i + 1].add(x + y)
-// }
-// console.log(i + 1)
