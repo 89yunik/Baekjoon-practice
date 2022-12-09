@@ -23,11 +23,3 @@ while (i < Q.length) {
   for (let j = 1; j < 7; j++) Q.push(A[curr + j])
 }
 console.log(o)
-// const dp = Array(101).fill(Infinity)
-// for (let i = 2; i < 8; i++) dp[A[i]] = 1
-// for (let i = 8; i < 101; i++) {
-//   const prev = []
-//   for (let j = 1; j < 7; j++) prev.push(dp[A[i - j]])
-//   dp[A[i]] = Math.min(dp[A[i]], Math.min(...prev) + 1)
-// }
-// console.log(dp[100])
