@@ -6,17 +6,17 @@ let I = require('fs')
 // let I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
 const [N, dist, cost] = [
   +I[0],
-  I[1].split(' ').map(Number),
-  I[2].split(' ').map(Number),
+  I[1].split(' ').map(BigInt),
+  I[2].split(' ').map(BigInt),
 ]
-let [o, i] = [0, 0]
+let [o, i] = [0n, 0]
 while (i < N - 1) {
   let [x, j] = [dist[i], i + 1]
-  for (; j < N && cost[j - 1] < cost[j]; j++) x += dist[j]
+  for (; j < N - 1 && cost[i] < cost[j]; j++) x += dist[j]
   o += cost[i] * x
   i = j
 }
-console.log(o)
+console.log(o.toString())
 // const [N, M] = I.shift().split(' ').map(Number)
 // I = I.map(e => e.split(' ').map(Number))
 // function dfs(curr, cnt, num) {
