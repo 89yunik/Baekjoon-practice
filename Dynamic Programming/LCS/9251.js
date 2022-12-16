@@ -10,5 +10,4 @@ for (let i = 0; i < r; i++)
   for (let j = 0; j < c; j++)
     if (A[i] == B[j]) dp[i][j] = (i && j ? dp[i - 1][j - 1] : 0) + 1
     else dp[i][j] = Math.max(i ? dp[i - 1][j] : 0, j ? dp[i][j - 1] : 0)
-
 console.log(dp[r - 1][c - 1])
