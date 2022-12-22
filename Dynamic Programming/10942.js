@@ -1,4 +1,4 @@
-let [[N], A, [M], ...I] = require('fs')
+let [[N], A, [], ...I] = require('fs')
   .readFileSync('./dev/stdin')
   .toString()
   .trim()
@@ -6,13 +6,11 @@ let [[N], A, [M], ...I] = require('fs')
   .map(e => e.split(' ').map(Number))
 // let I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(e => e.split(' ').map(Number))
 const B = [...Array(N)].map((_, i) => new Set())
-for (let i = 0; i < N; i++) {
-  let j = 0
-  while (i + j < N && i >= j && A[i + j] == A[i - j]) B[i - j].add(i + j++)
-  j = 0
-  while (i + j + 1 < N && i >= j && A[i + j + 1] == A[i - j])
-    B[i - j].add(i + j++ + 1)
+function F(i, j, x) {
+  while (i + j + x < N && i >= j && A[i + j + x] == A[i - j])
+    B[i - j].add(i + j++ + x)
 }
+for (let i = 0; i < N; i++) F(i, 0, 0) || F(i, 0, 1)
 let O = []
 for (let [S, E] of I) O.push(B[--S].has(--E) ? 1 : 0)
 console.log(O.join('\n'))
