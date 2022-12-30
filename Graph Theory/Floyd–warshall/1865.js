@@ -1,4 +1,4 @@
-let [[TC], ...I] = require('fs')
+let [[], ...I] = require('fs')
   .readFileSync('./dev/stdin')
   .toString()
   .trim()
@@ -25,7 +25,6 @@ while (i < I.length) {
         A[k][l] = Math.min(A[k][l], A[k][j] + A[j][l])
         if (k == l && A[k][l] < 0 && (o = 'YES')) break
       }
-  // for (let j = 1; j <= N; j++) if (A[j][j] < 0 && (o = 'YES')) break
   O.push(o)
 }
 console.log(O.join('\n'))
