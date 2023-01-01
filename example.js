@@ -4,15 +4,12 @@ let [N, k] = require('fs')
   .trim()
   .split('\r\n')
   .map(Number)
-// let I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(e => e.split(' ').map(Number))
-let [x, i, j] = [0, 1, 2]
-while (x + i < k)
-  if (i < N) {
-    x += i++
-    j++
-  } else {
-    x += i--
-    j++
-  }
-const A = [...Array(j)]
-console.log(x, i, j)
+// let I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(Number)
+let [l, r] = [1, k]
+while (l < r) {
+  const mid = ~~((l + r) / 2)
+  let x = 0
+  for (let i = 1; i <= N; i++) x += Math.min(~~(mid / i), N)
+  x < k ? (l = mid + 1) : (r = mid)
+}
+console.log(l)
