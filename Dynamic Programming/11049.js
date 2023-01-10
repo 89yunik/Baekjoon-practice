@@ -1,12 +1,10 @@
-const I = require('fs')
+const [[N], ...A] = require('fs')
   .readFileSync('./dev/stdin')
   .toString()
   .trim()
   .split('\r\n')
-// const I = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
-const [N, A] = [+I[0], []]
-for (let i = 1; i < N + 1; i++) A.push(I[i].split(' ').map(Number))
-const B = Array.from({length: N}, _ => Array(N).fill(0))
+  .map(e => e.split(' ').map(Number))
+const B = [...Array(N)].map(_ => Array(N).fill(0))
 for (let x = 1; x < N; x++)
   for (let i = 0; i < N - x; i++) {
     let M = Infinity
