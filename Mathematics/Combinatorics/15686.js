@@ -4,9 +4,6 @@ let [[N, M], ...I] = require('fs')
   .trim()
   .split('\r\n')
   .map(e => e.split(' ').map(Number))
-// let [N, M] = [50, 1]
-// let I = [...Array(N)].map(_ => Array(N).fill(1))
-// I[0][0]++
 const [S, E] = [[], []]
 for (let i = 0; i < N; i++)
   for (let j = 0; j < N; j++)
