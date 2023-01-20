@@ -10,10 +10,7 @@ for (let i = 0; i < N; i++)
 let cnt = Q.length
 while (Q.length) {
   const [x, y] = Q.shift()
-  if (!cnt--) {
-    cnt = Q.length
-    o++
-  }
+  if (!cnt-- && ++o) cnt = Q.length
   const next = [
     [x - 1, y - 1],
     [x - 1, y],
@@ -25,9 +22,15 @@ while (Q.length) {
     [x + 1, y + 1],
   ]
   for (const [nx, ny] of next)
-    if (nx >= 0 && nx < N && ny >= 0 && ny < M && !V[nx][ny] && !I[nx][ny]) {
-      V[nx][ny]++
+    if (
+      nx >= 0 &&
+      nx < N &&
+      ny >= 0 &&
+      ny < M &&
+      !V[nx][ny] &&
+      !I[nx][ny] &&
+      ++V[nx][ny]
+    )
       Q.push([nx, ny])
-    }
 }
 console.log(o)
