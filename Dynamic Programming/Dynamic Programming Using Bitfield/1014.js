@@ -37,6 +37,6 @@ while (i < I.length) {
       }
       if (!k) break
     }
-  O.push(dp.reduce((a, b) => Math.max(a, ...b), 0))
+  O.push(Math.max(...dp[N - 1]))
 }
 console.log(O.join('\n'))
