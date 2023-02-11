@@ -19,5 +19,5 @@ function F(M) {
   return n
 }
 let o = 0
-for (let i = 0; i < 101; i++) o = Math.max(F(i), o)
+for (let i = 0; i < 100; i++) o = Math.max(F(i), o)
 console.log(o)

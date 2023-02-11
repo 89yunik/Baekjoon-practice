@@ -1,23 +1,11 @@
-let [[N], ...I] = `${require('fs').readFileSync('./dev/stdin')}`.trim()
-  .split`\n`.map(e => e.split` `.map(Number))
-function F(M) {
-  let [V, n] = [[...Array(N)].map(_ => Array(N).fill(0)), 0]
-  function dfs(x, y) {
-    V[x][y] = 1
-    const next = [
-      [x - 1, y],
-      [x, y - 1],
-      [x, y + 1],
-      [x + 1, y],
-    ]
-    next.forEach(
-      ([nx, ny]) => I[nx] && I[nx][ny] > M && !V[nx][ny] && dfs(nx, ny),
-    )
-  }
-  for (let i = 0; i < N; i++)
-    for (let j = 0; j < N; j++) if (!V[i][j] && I[i][j] > M && ++n) dfs(i, j)
-  return n
-}
-let o = 0
-for (let i = 0; i < 101; i++) o = Math.max(F(i), o)
-console.log(o)
+let A = `${require('fs').readFileSync('./dev/stdin')}`.trim().split` `.map(
+  Number,
+)
+const B = [15, 19, 28]
+;[A[1], A[2]] = [A[2], A[1]]
+const x = A.indexOf(Math.min(...A))
+const m = A[x]
+A = A.map(e => e - m)
+let i = 0
+for (; !B.every((e, j) => i % e == A[j]); i += B[x]) {}
+console.log(i + m)
