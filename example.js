@@ -1,3 +1,2 @@
-let S = `${require('fs').readFileSync('./dev/stdin')}`
-S = S.replace(/[0-9]/g, x => (+x).toString(2).padStart(3, 0))
-console.log(S.indexOf('1') != -1 ? S.slice(S.indexOf('1')) : 0)
+let I = `${require('fs').readFileSync('./dev/stdin')}`.trim().split`\r\n`
+console.log(I[0].length < I[1].length ? 'no' : 'yes')
