@@ -1,8 +1,7 @@
 let [[H, W], [N], ...I] = `${require('fs').readFileSync('./dev/stdin')}`.trim()
   .split`\n`.map(e => e.split` `.map(Number))
 let [o, F] = [0, (x, y) => !((x > H || y > W) && (x > W || y > H))]
-for (let i = 0; i < N; i++) {
-  const [a, b] = I[i]
+I.forEach(([a, b], i) => {
   for (let j = i + 1; j < N; j++) {
     const [c, d] = I[j]
     if (
@@ -13,5 +12,5 @@ for (let i = 0; i < N; i++) {
     )
       o = Math.max(o, a * b + c * d)
   }
-}
+})
 console.log(o)
