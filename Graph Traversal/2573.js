@@ -69,5 +69,4 @@ function F() {
   }
   return 0
 }
-
 console.log(F())
