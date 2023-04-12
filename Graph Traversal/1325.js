@@ -9,7 +9,7 @@ for (let i = 1; i <= N; i++) {
     V[c]++
     for (let i = 0; i < G[c].length; i++) {
       const n = G[c][i]
-      !V[n] && ++o && dfs(n, V)
+      !V[n] && ++o && dfs(n)
     }
   }
   dfs(i, V)
